@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 interface InjuryFormModalProps {
     open: boolean
     onClose: () => void
-    position: { x: number; y: number }
+    position?: { x: number; y: number }
     onSave: (data: {
         type: string
         description: string
@@ -21,7 +21,7 @@ interface InjuryFormModalProps {
     }) => void
 }
 
-export function InjuryFormModal({ open, onClose, position, onSave }: InjuryFormModalProps) {
+export function InjuryFormModal({ open, onClose, onSave }: InjuryFormModalProps) {
     const [formData, setFormData] = useState({
         type: "",
         description: "",
