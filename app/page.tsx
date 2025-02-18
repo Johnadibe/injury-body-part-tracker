@@ -1,11 +1,57 @@
-import InjuryTracker from "@/components/inury-tracker";
+"use client"
 
-export default function Home() {
+import { useState } from "react"
+import { BodyDiagram } from "@/components/body-diagram"
+import { InjuryModal } from "@/components/injury-modal"
+import type { InjuryData } from "@/types/injury"
+
+export default function HomePage() {
+  const [injuries, setInjuries] = useState<Record<string, InjuryData>>({})
+  const [selectedPart, setSelectedPart] = useState<string | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handlePartClick = (partId: string) => {
+    setSelectedPart(partId)
+    setIsModalOpen(true)
+  }
+
+  const handleSaveInjury = (injury: InjuryData) => {
+    if (selectedPart) {
+      setInjuries((prev) => ({
+        ...prev,
+        [selectedPart]: injury,
+      }))
+    }
+    setIsModalOpen(false)
+  }
+
+  const handleRemoveInjury = () => {
+    if (selectedPart) {
+      const newInjuries = { ...injuries }
+      delete newInjuries[selectedPart]
+      setInjuries(newInjuries)
+    }
+    setIsModalOpen(false)
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen pb-20 gap-16 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <InjuryTracker />
-      </main>
-    </div>
-  );
+    <main className="container mx-auto p-4 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-3xl font-bold">Injury Body Chart</h1>
+      </header>
+
+      <div className="flex justify-center">
+        <BodyDiagram injuries={injuries} onPartClick={handlePartClick} />
+      </div>
+
+      <InjuryModal
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        selectedPart={selectedPart}
+        injury={selectedPart ? injuries[selectedPart] : undefined}
+        onSave={handleSaveInjury}
+        onRemove={handleRemoveInjury}
+      />
+    </main>
+  )
 }

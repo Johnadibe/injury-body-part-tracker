@@ -13,15 +13,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 interface InjuryFormModalProps {
     open: boolean
     onClose: () => void
-    position?: { x: number; y: number }
+    position: { x: number; y: number }
+    bodyPart?: string
     onSave: (data: {
         type: string
         description: string
         date: string
     }) => void
+    onCancel?: () => void
 }
 
-export function InjuryFormModal({ open, onClose, onSave }: InjuryFormModalProps) {
+export function InjuryFormModal({ open, onClose, position, bodyPart, onSave, onCancel }: InjuryFormModalProps) {
     const [formData, setFormData] = useState({
         type: "",
         description: "",
@@ -43,6 +45,10 @@ export function InjuryFormModal({ open, onClose, onSave }: InjuryFormModalProps)
                     <DialogTitle>Record Injury Details</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="space-y-2">
+                        <Label>Body Part</Label>
+                        <p className="font-medium">{bodyPart}</p>
+                    </div>
                     <div className="space-y-2">
                         <Label htmlFor="type">Injury Type</Label>
                         <Select value={formData.type} onValueChange={(value) => setFormData({ ...formData, type: value })}>
@@ -79,7 +85,7 @@ export function InjuryFormModal({ open, onClose, onSave }: InjuryFormModalProps)
                         />
                     </div>
                     <div className="flex justify-end gap-2">
-                        <Button type="button" variant="outline" onClick={onClose}>
+                        <Button type="button" variant="outline" onClick={onCancel}>
                             Cancel
                         </Button>
                         <Button type="submit">Save</Button>
