@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Injury Reporting Form
 
-## Getting Started
+This project is an interactive injury reporting form with a visual body chart. Users can mark injuries on a human body diagram, add details about each injury, and fill out additional information related to the incident.
 
-First, run the development server:
+## Prerequisites
 
-```bash
+Before you begin, ensure you have the following installed:
+
+- Node.js (version 14 or later)
+- npm (usually comes with Node.js)
+
+## Installation
+
+1. Clone the repository:
+
+   ```
+   git clone https://github.com/Johnadibe/injury-body-part-tracker.git
+   cd injury-body-part-tracker
+   ```
+
+2. Install the dependencies:
+   ```
+   npm install
+   ```
+
+## Usage
+
+To run the development server:
+
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Click on body parts to add injuries
+- View and edit injury details
+- Responsive design
+- Form sections for additional injury information
 
-## Learn More
+## How to Use
 
-To learn more about Next.js, take a look at the following resources:
+1. Click on a body part to add an injury. Fill out the injury details in the popup form.
+2. Click on red indicators to view saved injury details.
+3. Fill out the additional form sections for more information about the injury.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technologies Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- shadcn/ui components
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `app/page.tsx`: Main component with the injury form logic
+- `components/injury-form-modal.tsx`: Modal component for adding/editing injuries
